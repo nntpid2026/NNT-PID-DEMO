@@ -1,0 +1,155 @@
+@import "tailwindcss";
+
+@theme {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-primary: var(--primary);
+  --color-secondary: var(--secondary);
+  --color-muted: var(--muted);
+  --color-accent: var(--accent);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+
+  --color-primary-foreground: var(--primary-foreground);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-card-foreground: var(--card-foreground);
+  --color-secondary-foreground: var(--secondary-foreground);
+
+  --font-sans: "Inter", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", monospace;
+}
+
+@layer base {
+  :root {
+    --background: #ffffff;
+    --foreground: #0f172a;
+    --card: #ffffff;
+    --card-foreground: #0f172a;
+    --primary: #17707B;
+    --primary-foreground: #ffffff;
+    --secondary: #f1f5f9;
+    --secondary-foreground: #0f172a;
+    --muted: #f1f5f9;
+    --muted-foreground: #64748b;
+    --accent: #14b8a6;
+    --destructive: #ef4444;
+    --border: #e2e8f0;
+    --input: #e2e8f0;
+    --ring: #17707B;
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: #212121;
+    --foreground: #ececec;
+    --card: #2f2f2f;
+    --card-foreground: #ececec;
+    --primary: #2FA39E;
+    --primary-foreground: #212121;
+    --secondary: #424242;
+    --secondary-foreground: #ececec;
+    --muted: #424242;
+    --muted-foreground: #b4b4b4;
+    --accent: #2dd4bf;
+    --destructive: #7f1d1d;
+    --border: #424242;
+    --input: #424242;
+    --ring: #2FA39E;
+  }
+}
+
+@layer base {
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    letter-spacing: -0.01em;
+  }
+}
+
+@layer components {
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+  }
+
+  @keyframes fade-up {
+    from { opacity: 0; transform: translateY(8px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+  @keyframes fade-in-soft {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+  }
+  @keyframes pop-in {
+    0%   { opacity: 0; transform: scale(0.96); }
+    100% { opacity: 1; transform: scale(1); }
+  }
+  @keyframes grow-width {
+    from { transform: scaleX(0); }
+    to   { transform: scaleX(1); }
+  }
+
+  .animate-fade-up { animation: fade-up 0.32s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+  .animate-fade-in-soft { animation: fade-in-soft 0.3s ease-out both; }
+  .animate-pop-in { animation: pop-in 0.2s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+  .origin-left-grow { transform-origin: left; animation: grow-width 0.5s cubic-bezier(0.22, 0.61, 0.36, 1) both; }
+
+  @media (prefers-reduced-motion: reduce) {
+    .animate-fade-up,
+    .animate-fade-in-soft,
+    .animate-pop-in,
+    .origin-left-grow { animation: none; }
+  }
+
+  .workspace-canvas {
+    background-image:
+      radial-gradient(circle at 1px 1px, var(--border) 1px, transparent 0);
+    background-size: 22px 22px;
+  }
+  .dark .workspace-canvas {
+    background-image: none;
+  }
+
+  .surface {
+    @apply bg-card border border-border rounded-lg shadow-sm;
+  }
+  
+  .eng-table {
+    @apply w-full text-sm text-left border-collapse;
+  }
+  .eng-table th {
+    @apply bg-muted font-medium text-foreground px-4 py-2 border-b border-border;
+  }
+  .eng-table td {
+    @apply px-4 py-2 border-b border-border;
+  }
+  .eng-table tbody tr {
+    @apply hover:bg-secondary/50 transition-colors;
+  }
+  
+  .field-input {
+    @apply flex h-10 w-full rounded-md border border-input bg-transparent px-3 py-2 text-sm ring-offset-background file:border-0 file:bg-transparent file:text-sm file:font-medium placeholder:text-muted-foreground focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-50;
+  }
+  
+  .scrollbar-thin {
+    scrollbar-width: thin;
+    scrollbar-color: var(--border) transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  .scrollbar-thin::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  .scrollbar-thin::-webkit-scrollbar-thumb {
+    @apply bg-border rounded-full;
+  }
+  
+  .nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
