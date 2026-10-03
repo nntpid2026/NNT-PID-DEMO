@@ -3,7 +3,7 @@ import { FiActivity, FiFileText, FiPlus, FiArrowRight, FiCheckCircle, FiAlertCir
 import { Link } from 'react-router-dom';
 import { useMockStore } from '../../context/useMockStore';
 import { cn } from '../../utils/utils';
-import InsulationCalcCard from './lineEntry/InsulationCalcCard';
+
 
 export default function CompanyDashboard() {
   const { lines, activeProject, companyName } = useMockStore();
@@ -119,11 +119,7 @@ export default function CompanyDashboard() {
             </div>
           </div>
           
-          {/* Insulation BOQ Preview */}
-          <div className="flex-1 w-full flex flex-col">
-            <h3 className="text-lg font-semibold mb-4">Insulation Preview</h3>
-            <InsulationCalcCard line={recentLines[0] || null} />
-          </div>
+
           
         </div>
 
