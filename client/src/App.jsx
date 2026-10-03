@@ -31,7 +31,7 @@ import CompanySettings from './pages/company/CompanySettings';
 
 export default function App() {
   return (
-    <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+    <ThemeProvider attribute="class" defaultTheme="light">
       <BrowserRouter>
         <ScrollToTop />
         <Routes>
